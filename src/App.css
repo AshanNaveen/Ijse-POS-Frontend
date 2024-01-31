@@ -36,3 +36,59 @@
     transform: rotate(360deg);
   }
 }
+
+.bottomContainer{
+    display: flex;
+    width: 100%;
+}
+
+.detailPane{
+  flex: 4;
+  height: 100vh;
+}
+.orderPane{
+  height: 100%;
+  flex: 2;
+}
+
+.bg-color{
+  background-color:aliceblue;
+}
+
+.bg{
+  height: 100vh;
+  width: 100vw;
+  font-size: 20px;
+  margin: 0px;
+  background-color:aliceblue;
+  text-align: center;
+  color: black;
+}
+
+.topic{
+  font-size: 40px;
+  font-weight: bold;
+  padding-top: 2%;
+  font-size: 80px;
+}
+
+.row{
+  padding-top: 5%;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon{
+  width: 100px;
+  height: 100px;
+}
+.product-panel{
+  margin-top: -100px;
+}
+.side-panel{
+  margin-right: 50px;
+}
+
+.detail-pane-card{
+  min-height: 200px;
+}
