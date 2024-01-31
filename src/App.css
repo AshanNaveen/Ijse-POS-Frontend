@@ -92,3 +92,7 @@
 .detail-pane-card{
   min-height: 200px;
 }
+
+.cart-item-title{
+  margin-top: -15px;
+}

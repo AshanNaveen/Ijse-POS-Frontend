@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 const Checkout = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategory] = useState([]);
+  const [total, setTotol] = useState(0);
+
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
 
@@ -38,6 +40,28 @@ const Checkout = () => {
     );
     setProducts(response.data);
   };
+
+  const handleCart = (id, name, price) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((item) => item.id === id);
+
+      if (existingItem) {
+        const qty = existingItem.qty+1;
+        return prevCart.map((item) =>
+          item.id === id
+            ? { ...item, qty:qty , price:price * qty }
+            : item
+        );
+      } else {
+        return [...prevCart, { id: id, name: name, qty: 1, price: price }];
+      }
+    });
+    
+    console.log(cart);
+  };
+
+
+
   return (
     <div className="bg-color">
       <NavBar />
@@ -83,9 +107,15 @@ const Checkout = () => {
                           <br />
                           Qauntity : {product.qty}
                         </p>
-                        <a href="#" class="btn btn-primary">
+                        <button
+                          id={product.id}
+                          onClick={() =>
+                            handleCart(product.id, product.name, product.price)
+                          }
+                          class="btn btn-primary"
+                        >
                           Add to cart
-                        </a>
+                        </button>
                       </div>
                     </div>
                   ))}
@@ -97,19 +127,36 @@ const Checkout = () => {
         <div className="orderPane">
           <div className="text-center">
             <h3 className="m-3">Cart</h3>
-            <div class="card">
-              <div class="card-body">This is some text within a card body.</div>
-            </div>
-            <div class="card">
-              <div class="card-body">This is some text within a card body.</div>
-            </div>
-            <div class="card">
-              <div class="card-body">This is some text within a card body.</div>
-            </div>
-            <div class="card">
-              <div class="card-body">This is some text within a card body.</div>
-            </div>
           </div>
+          {cart &&
+            cart.map((cartItem) => (
+              <div class="card mb-3">
+                <div class="row g-0">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title cart-item-title ">
+                        {cartItem.name}
+                        <br />
+                        <span className="fs-5 fw-normal">
+                          {" "}
+                          Quantity : {cartItem.qty}
+                        </span>
+                        <br />
+                        <span className="cart-item-price">
+                          {" "}
+                          Rs.{cartItem.price}
+                        </span>
+                      </h5>
+                      <p class="card-text"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
+        <div>
+          
         </div>
       </div>
     </div>
